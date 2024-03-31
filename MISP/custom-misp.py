@@ -90,7 +90,7 @@ if event_source == 'windows':
     misp_search_value = "value:"f"{wazuh_event_param}"
     misp_search_url = ''.join([misp_base_url, misp_search_value])
     try:
-        misp_api_response = requests.get(misp_search_url, headers=misp_apicall_headers, verify='/yourpath/to/rootCA.pem')
+        misp_api_response = requests.get(misp_search_url, headers=misp_apicall_headers, verify='/yourpath/to/rootCA.pem', timeout=60)
     except ConnectionError:
         alert_output["misp"] = {}
         alert_output["integration"] = "misp"
@@ -116,7 +116,7 @@ elif event_source == 'linux':
                 misp_search_value = "value:"f"{wazuh_event_param}"
                 misp_search_url = ''.join([misp_base_url, misp_search_value])
                 try:
-                    misp_api_response = requests.get(misp_search_url, headers=misp_apicall_headers, verify='/yourpath/to/rootCA.pem')
+                    misp_api_response = requests.get(misp_search_url, headers=misp_apicall_headers, verify='/yourpath/to/rootCA.pem', timeout=60)
                 except ConnectionError:
                     alert_output["misp"] = {}
                     alert_output["integration"] = "misp"
@@ -147,7 +147,7 @@ elif event_source == 'ossec' and event_type == "syscheck_entry_added":
     misp_search_value = "value:"f"{wazuh_event_param}"
     misp_search_url = ''.join([misp_base_url, misp_search_value])
     try:
-        misp_api_response = requests.get(misp_search_url, headers=misp_apicall_headers, verify='/yourpath/to/rootCA.pem')
+        misp_api_response = requests.get(misp_search_url, headers=misp_apicall_headers, verify='/yourpath/to/rootCA.pem', timeout=60)
     except ConnectionError:
         alert_output["misp"] = {}
         alert_output["integration"] = "misp"
