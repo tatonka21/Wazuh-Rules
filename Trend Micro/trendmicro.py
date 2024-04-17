@@ -1,10 +1,10 @@
 #!/var/ossec/framework/python/bin/python3
 import sys
 import time
-import requests
 import json
-from pathlib import Path
 from datetime import datetime, timedelta
+from security import safe_requests
+
 #File to store the alerts
 output_file = '/tmp/trendmicro.json'
 #Function to append new lines to output file
@@ -32,7 +32,7 @@ headers = {'Authorization': 'Bearer ' + token}
 #Initialise Output Array
 alert_output = {}
 #API CALL and Append Response
-r = requests.get(url_base + url_path, params=query_params, headers=headers)
+r = safe_requests.get(url_base + url_path, params=query_params, headers=headers)
 if 'application/json' in r.headers.get('Content-Type', '') and len(r.content):
     if r.status_code == 200:
         r_json = r.json()
