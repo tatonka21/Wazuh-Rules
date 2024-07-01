@@ -41,7 +41,7 @@ dns_query_name = alert["data"]["win"]["eventdata"]["queryName"]
 dns_stats_url = ''.join([dns_stats_base_url, dns_query_name])
 # DNS Stat API Call
 try:
- dns_stats_response = requests.get(dns_stats_url)
+ dns_stats_response = requests.get(dns_stats_url, timeout=60)
 except ConnectionError:
     alert_output["dnsstat"] = {}
     alert_output["integration"] = "dnsstat"
