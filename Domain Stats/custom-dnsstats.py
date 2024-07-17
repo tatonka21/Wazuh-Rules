@@ -10,11 +10,10 @@
 import sys
 import os
 from socket import socket, AF_UNIX, SOCK_DGRAM
-from datetime import date, datetime, timedelta
-import time
-import requests
 from requests.exceptions import ConnectionError
 import json
+from security import safe_requests
+
 pwd = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 socket_addr = '{0}/queue/sockets/queue'.format(pwd)
 def send_event(msg, agent = None):
@@ -41,7 +40,7 @@ dns_query_name = alert["data"]["win"]["eventdata"]["queryName"]
 dns_stats_url = ''.join([dns_stats_base_url, dns_query_name])
 # DNS Stat API Call
 try:
- dns_stats_response = requests.get(dns_stats_url)
+ dns_stats_response = safe_requests.get(dns_stats_url)
 except ConnectionError:
     alert_output["dnsstat"] = {}
     alert_output["integration"] = "dnsstat"
