@@ -36,7 +36,7 @@ def send_event(msg):
 
 # Perform HTTP request
 def make_request(method, url, headers, data=None):
-    response = requests.request(method, url, headers=headers, data=data)
+    response = requests.request(method, url, headers=headers, data=data, timeout=60)
 
     # If the request succeed 
     if response.status_code >= 200 and response.status_code < 210:

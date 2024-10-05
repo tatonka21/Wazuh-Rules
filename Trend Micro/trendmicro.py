@@ -32,7 +32,7 @@ headers = {'Authorization': 'Bearer ' + token}
 #Initialise Output Array
 alert_output = {}
 #API CALL and Append Response
-r = requests.get(url_base + url_path, params=query_params, headers=headers)
+r = requests.get(url_base + url_path, params=query_params, headers=headers, timeout=60)
 if 'application/json' in r.headers.get('Content-Type', '') and len(r.content):
     if r.status_code == 200:
         r_json = r.json()
